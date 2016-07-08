@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Padawan.iml" filepath="$PROJECT_DIR$/Padawan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/flipper/flipper.iml" filepath="$PROJECT_DIR$/flipper/flipper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/padawan.iml" filepath="$PROJECT_DIR$/padawan.iml" />
     </modules>
   </component>
 </project>

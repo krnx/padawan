@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
@@ -56,19 +57,18 @@ public class PlayerActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Si la petición se hizo correctamente y requestCode es REQUEST_CODE_EXTERNAL_STORAGE
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_EXTERNAL_STORAGE) {
-            Toast.makeText(this, "File Ok", Toast.LENGTH_LONG).show();
             Uri uri = data.getData();
-
             mediaPlayer = new MediaPlayer();
-
             try {
-                mediaPlayer.reset();
-                mediaPlayer.setDataSource(this, uri);
+                Log.v("Player", "Falla el setDataSource amb URI: " + uri.toString());
+                mediaPlayer.setDataSource(getApplicationContext(), uri);//Falla
+//                mediaPlayer.prepare();
+//                mediaPlayer.reset();
             } catch (IOException e) {
                 Toast.makeText(getApplicationContext(), "Ha fallat IO: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 Log.v("Player", "Ha fallat IO: " + e.getMessage());
+                e.printStackTrace();
             }
-//                mediaPlayer.prepare();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 public void onPrepared(MediaPlayer mp) {
                     Toast.makeText(getApplicationContext(), "Comença!", Toast.LENGTH_SHORT).show();
@@ -81,16 +81,22 @@ public class PlayerActivity extends BaseActivity {
                     //finish();
                 }
             });
-            mediaPlayer.prepareAsync();
+
+//            mediaPlayer.start();
+//            mediaPlayer.pause();
+//            mediaPlayer.stop();
+//            mediaPlayer.release();
+
+//            mediaPlayer.prepareAsync();
         } else
             Toast.makeText(this, "File Failed", Toast.LENGTH_LONG).show();
     }
 
     private void releaseMediaPlayer() {
-//        if (mediaPlayer != null) {
+        if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
-//        }
+        }
     }
 
     @Override
@@ -99,6 +105,7 @@ public class PlayerActivity extends BaseActivity {
         releaseMediaPlayer();
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         if (mediaPlayer.getAudioSessionId() != 0) {

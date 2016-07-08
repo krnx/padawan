@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/calculadora"
+            android:title="@string/calculadora" />
+        <item
+            android:id="@+id/ranking"
+            android:title="@string/ranking" />
+        <item
+            android:id="@+id/player"
+            android:title="@string/player" />
+        <item
+            android:id="@+id/sensor"
+            android:title="@string/sensor" />
+        <item
+            android:id="@+id/twitter"
+            android:title="@string/twitter" />
+        <item
+            android:id="@+id/memory"
+            android:title="@string/memory" />
+    </group>
+
+</menu>

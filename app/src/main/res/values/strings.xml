@@ -100,5 +100,10 @@
     <string name="sensor">Sensors</string>
     <string name="twitter">Twitter Login</string>
     <string name="memory">Memory</string>
+    <string name="signin">Registrar-se</string>
+    <string name="name">Nom</string>
+    <string name="surname">Cognoms</string>
+    <string name="email">E-mail</string>
+    <string name="phone">Telefon</string>
 
 </resources>

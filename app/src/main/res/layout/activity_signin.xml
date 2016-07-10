@@ -10,75 +10,74 @@
     tools:context="com.example.krnx.padawan.LoginActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:weightSum="1"
-        android:gravity="center">
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
             <EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:id="@+id/usuari"
-                android:layout_gravity="center_horizontal"
-                android:password="false"
-                android:hint="email@example.com" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:hint="@string/name"
+                android:inputType="text" />
+            />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/surname"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:layout_gravity="center_horizontal"
                 android:ems="10"
-                android:id="@+id/contrsenya"
-                android:layout_weight="1"
-                android:hint="******"
-                android:password="true" />
+                android:hint="@string/surname"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="@string/phone"
+                android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
+
 
             <Button
+                android:id="@+id/register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:id="@+id/login"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorAccent"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/signin"
-                android:id="@+id/signin"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorAccent"
                 android:layout_marginLeft="10dp"
+                android:background="@color/colorPrimary"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:text="@string/signin"
+                android:textColor="@color/colorAccent" />
 
 
         </LinearLayout>
@@ -88,7 +87,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone" />-->
-
 
 
     </LinearLayout>

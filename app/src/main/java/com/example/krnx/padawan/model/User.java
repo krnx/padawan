@@ -7,15 +7,19 @@ public class User {
 
     private int icon;
     private String name;
+    private String surname;
     private String phone;
+    private String email;
 
-    public User(int icon, String name, String phone){
+    public User(int icon, String name, String surname, String email) {
         this.icon = icon;
         this.name = name;
-        this.phone = phone;
+        this.name = surname;
+        this.phone = email;
 
     }
-    public User(){
+
+    public User() {
 
     }
 
@@ -33,6 +37,22 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {

@@ -116,6 +116,7 @@ public class userHelper extends SQLiteOpenHelper {
 
     public void insertUser(ContentValues values){
         SQLiteDatabase db = this.getWritableDatabase();
+
         if (db != null) {
             db.insert(
                     TABLE_NAME,

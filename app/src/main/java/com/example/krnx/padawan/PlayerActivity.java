@@ -41,7 +41,7 @@ public class PlayerActivity extends BaseActivity {
         setContentView(R.layout.activity_player);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-
+        mediaPlayer = new MediaPlayer();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,6 @@ public class PlayerActivity extends BaseActivity {
         // Si la petición se hizo correctamente y requestCode es REQUEST_CODE_EXTERNAL_STORAGE
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_EXTERNAL_STORAGE) {
             Uri uri = data.getData();
-            mediaPlayer = new MediaPlayer();
             try {
                 Log.v("Player", "Falla el setDataSource amb URI: " + uri.toString());
                 mediaPlayer.setDataSource(getApplicationContext(), uri);//Falla

@@ -20,7 +20,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
 
     RankingAdapter(){
         contactos = new ArrayList<>();
-        contactos.add(new User(0,"Benito Camela","123456789"));
+       /* contactos.add(new User(0,"Benito Camela","123456789"));
         contactos.add(new User(0,"Alberto Carlos Huevos","123456789"));
         contactos.add(new User(1,"Lola Mento","123456789"));
         contactos.add(new User(0,"Aitor Tilla","123456789"));
@@ -39,7 +39,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
         contactos.add(new User(1,"Helena Nito Del Bosque","123456789"));
         contactos.add(new User(0,"Unai Nomás","123456789"));
         contactos.add(new User(1,"Ester Colero","123456789"));
-        contactos.add(new User(0,"Marcos Corrón","123456789"));
+        contactos.add(new User(0,"Marcos Corrón","123456789"));*/
     }
 
 

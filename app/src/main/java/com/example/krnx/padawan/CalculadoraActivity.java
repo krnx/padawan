@@ -216,8 +216,10 @@ public class CalculadoraActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v("Player-calc","Contacts:"+resultCode);
+        Log.v("Player-calc","Contacts:"+requestCode);
         // Si la petición se hizo correctamente y PICK_CONTACT_REQUEST
-       /* if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
             // Hacemos la consulta del nombre del contacto.
             Cursor cursor = getContentResolver().query(
                     ContactsContract.Contacts.CONTENT_URI, null,
@@ -227,9 +229,10 @@ public class CalculadoraActivity extends BaseActivity implements View.OnClickLis
                 // True si el cursor no está vacío
                 int columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                 String name = cursor.getString(columnIndex);
-                Toast.makeText(this, name, Toast.LENGTH_LONG).show();
+                Log.v("Player-calc","Nom: "+name);
+                Toast.makeText(this, "Nom: "+name, Toast.LENGTH_LONG).show();
             }
-        }*/
+        }
     }
 
     @Override

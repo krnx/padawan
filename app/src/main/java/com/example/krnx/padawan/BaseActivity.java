@@ -64,7 +64,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView userName = (TextView) headerLayout.findViewById(R.id.header_name);
-        userName.setText(useremail);
+        TextView userEmail = (TextView) headerLayout.findViewById(R.id.header_baseline);
+        userEmail.setText(useremail);
         Log.v("Padawan", userName.getText().toString());
     }
 

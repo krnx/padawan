@@ -38,28 +38,35 @@
                 android:text="1"
                 android:background="@color/colorPrimary"
                 android:id="@+id/u"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"
+                android:background="@color/colorPrimary"
                 android:id="@+id/dos"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3"
+                android:background="@color/colorPrimary"
                 android:id="@+id/tres"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/"
+                android:background="@color/colorPrimary"
                 android:id="@+id/dividir"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,29 +79,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4"
+                android:background="@color/colorPrimary"
                 android:id="@+id/quatre"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5"
+                android:background="@color/colorPrimary"
                 android:id="@+id/cinc"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
+                android:background="@color/colorPrimary"
                 android:id="@+id/sis"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="*"
+                android:background="@color/colorPrimary"
                 android:id="@+id/multiplicar"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -107,29 +122,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7"
+                android:background="@color/colorPrimary"
                 android:id="@+id/set"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8"
+                android:background="@color/colorPrimary"
                 android:id="@+id/vuit"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9"
+                android:background="@color/colorPrimary"
                 android:id="@+id/nou"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
+                android:background="@color/colorPrimary"
                 android:id="@+id/menys"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,29 +166,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="&lt;"
+                android:background="@color/colorPrimary"
                 android:id="@+id/back"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:background="@color/colorPrimary"
                 android:id="@+id/zero"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="."
+                android:background="@color/colorPrimary"
                 android:id="@+id/coma"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+"
+                android:background="@color/colorPrimary"
                 android:id="@+id/mes"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
 
         </LinearLayout>
 
@@ -179,22 +210,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="call"
+                android:background="@color/colorPrimary"
                 android:id="@+id/call"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact"
+                android:background="@color/colorPrimary"
                 android:id="@+id/contact"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:layout_margin="5dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="="
+                android:background="@color/colorPrimary"
                 android:id="@+id/igual"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

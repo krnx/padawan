@@ -107,5 +107,9 @@
     <string name="phone">Telefon</string>
     <string name="password">Contrasenya</string>
     <string name="user_already_registered">L\'usuari ja esta registrat</string>
+    <string name="playback_start">Comença!</string>
+    <string name="playback_end">This is the end!</string>
+    <string name="playback_error">S\'ha produït un error</string>
+    <string name="player_pantalla">Selecciona una cançó</string>
 
 </resources>

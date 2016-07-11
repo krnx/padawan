@@ -8,9 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -22,72 +25,179 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.material.joanbarroso.flipper.CoolImageFlipper;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by arnau on 05/07/16.
  */
-public class PlayerActivity extends BaseActivity {
+public class PlayerActivity extends BaseActivity implements View.OnClickListener {
     private MediaPlayer mediaPlayer = new MediaPlayer();
     final private int REQUEST_CODE_EXTERNAL_STORAGE = 123;
+
+    private CoolImageFlipper imatge;
+
+    private Boolean isPrepared = false;
+
+    private String path;
+    private Uri uriSound;
+    private TextView player_pantalla;
+    private ImageView player_previous;
+    private ImageView player_rew;
+    private ImageView player_play_pause;
+    private ImageView player_ff;
+    private FloatingActionButton player_load;
+
+    private SeekBar seekbar;
+    private double startTime = 0;
+    private double finalTime = 0;
+    private Handler myHandler = new Handler();
+    public static int oneTimeOnly = 0;
+
+    @Override
+    public void onClick(View view) {
+        playPauseSong(view);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        imatge = new CoolImageFlipper(getApplicationContext());
+
+        seekbar = (SeekBar) findViewById(R.id.seekBar);
+        seekbar.setClickable(false);
+
+        player_pantalla = (TextView) findViewById(R.id.player_pantalla);
+        player_previous = (ImageView) findViewById(R.id.player_previous);
+        player_rew = (ImageView) findViewById(R.id.player_rew);
+        player_play_pause = (ImageView) findViewById(R.id.player_play_pause);
+        player_ff = (ImageView) findViewById(R.id.player_ff);
+        player_load = (FloatingActionButton) findViewById(R.id.player_load);
+
+        player_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousSong();
+            }
+        });
+        player_rew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rewSong();
+            }
+        });
+
+        player_play_pause.setOnClickListener(this);
+
+        /*player_play_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playPauseSong(view);
+            }
+        });*/
+
+        player_ff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ffSong();
+            }
+        });
+        player_load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchSong();
             }
         });
     }
-    private void searchSong(){
-//        Intent file = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-        Intent file = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(file, REQUEST_CODE_EXTERNAL_STORAGE);
+
+    private void previousSong() {
+        mediaPlayer.seekTo(0);
     }
 
-    /*private void checkStoragePermissions() {
-        int hasStoragePermissions = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (hasStoragePermissions != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_CODE_EXTERNAL_STORAGE);
-            return;
-        }
-        searchSong();
-    }*/
+    private void rewSong() {
+        if (mediaPlayer.getCurrentPosition() - 5000 > 0)
+            mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
+        else
+            mediaPlayer.seekTo(0);
+    }
 
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_EXTERNAL_STORAGE:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission Granted
-                    searchSong();
-                } else {
-                    // Permission Denied
-                    Toast.makeText(PlayerActivity.this, "WRITE_STORAGE Denied", Toast.LENGTH_SHORT)
-                            .show();
+    private void playPauseSong(View view) {
+        if (isPrepared) {
+            if (mediaPlayer.isPlaying()) {
+                imatge.flipImage(getDrawable(android.R.drawable.ic_media_play), (ImageView) view);
+                mediaPlayer.pause();
+            } else {
+                imatge.flipImage(getDrawable(android.R.drawable.ic_media_pause), (ImageView) view);
+                mediaPlayer.start();
+
+                finalTime = mediaPlayer.getDuration();
+                startTime = mediaPlayer.getCurrentPosition();
+
+                if (oneTimeOnly == 0) {
+                    seekbar.setMax((int) finalTime);
+                    oneTimeOnly = 1;
                 }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                /*tx2.setText(String.format("%d min, %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                        TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) finalTime)))
+                );*/
+
+                /*tx1.setText(String.format("%d min, %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                        TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) startTime)))
+                );*/
+
+                seekbar.setProgress((int) startTime);
+                myHandler.postDelayed(UpdateSongTime, 100);
+
+            }
+        } else {
+            searchSong();
         }
-    }*/
+    }
+
+    private void searchSong() {
+
+        if (isPrepared) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        } else {
+            Intent file = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//            Intent file = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(file, REQUEST_CODE_EXTERNAL_STORAGE);
+        }
+    }
+
+    private void ffSong() {
+        if (mediaPlayer.getCurrentPosition() + 5000 < mediaPlayer.getDuration())
+            mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
+        else
+            mediaPlayer.stop();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Si la petición se hizo correctamente y requestCode es REQUEST_CODE_EXTERNAL_STORAGE
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_EXTERNAL_STORAGE) {
-            Uri uriSound = data.getData();
-//            String path = uriSound.getPath();
+            uriSound = data.getData();
+            path = uriSound.getPath();
             mediaPlayer = new MediaPlayer();
             try {
                 Log.v("Player", "setDataSource amb URI: " + uriSound.toString());
@@ -95,31 +205,38 @@ public class PlayerActivity extends BaseActivity {
                 mediaPlayer.setDataSource(this, uriSound);
 //                mediaPlayer.prepare();
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "Ha fallat IO: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 Log.v("Player", "Ha fallat IO: " + e.getMessage());
                 e.printStackTrace();
             }
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 public void onPrepared(MediaPlayer mp) {
-                    Toast.makeText(getApplicationContext(), "Comença!", Toast.LENGTH_SHORT).show();
-                    mediaPlayer.start();
+                    Toast.makeText(getApplicationContext(), R.string.playback_start, Toast.LENGTH_SHORT).show();
+                    player_pantalla.setText(getRealPathFromURI(getApplicationContext(), uriSound));
+                    isPrepared = true;
                 }
             });
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 public void onCompletion(MediaPlayer mp) {
-                    Toast.makeText(getApplicationContext(), "This is the end!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.playback_end, Toast.LENGTH_SHORT).show();
                     mediaPlayer.seekTo(0);
-                    //finish();
                 }
             });
             mediaPlayer.prepareAsync();
 
-//            mediaPlayer.pause();
-//            mediaPlayer.stop();
+
 //            mediaPlayer.release();
         } else
-            Toast.makeText(this, "File Failed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.playback_error, Toast.LENGTH_LONG).show();
     }
+
+    private Runnable UpdateSongTime = new Runnable() {
+        public void run() {
+            startTime = mediaPlayer.getCurrentPosition();
+//            tx1.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) startTime), TimeUnit.MILLISECONDS.toSeconds((long) startTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS. toMinutes((long) startTime))));
+            seekbar.setProgress((int) startTime);
+            myHandler.postDelayed(this, 100);
+        }
+    };
 
     private void releaseMediaPlayer() {
         if (mediaPlayer != null) {
@@ -145,5 +262,22 @@ public class PlayerActivity extends BaseActivity {
             }
         }
     }
+
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
 
 }

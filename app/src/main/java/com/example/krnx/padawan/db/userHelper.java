@@ -3,9 +3,13 @@ package com.example.krnx.padawan.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.krnx.padawan.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,7 @@ import java.util.List;
  */
 public class userHelper extends SQLiteOpenHelper {
     //Declaracion del nombre de la base de datos
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 7;
     //Declaracion global de la version de la base de datos
     public static final String DATABASE_NAME = "padawan";
     //Declaracion del nombre de la tabla
@@ -27,6 +31,7 @@ public class userHelper extends SQLiteOpenHelper {
             "surname VARCHAR(15), " +
             "birthdate DATE, " +
             "address VARCHAR(15), " +
+            "phone VARCHAR(50), " +
             "pass VARCHAR(50)" +
             ");";
 
@@ -48,7 +53,7 @@ public class userHelper extends SQLiteOpenHelper {
     public List getUsers() {
         List<String> fila = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"email", "name", "surname", "birthdate", "address"};
+        String[] columns = {"email", "name", "surname", "birthdate", "address", "phone"};
 
         if (db != null) {
             try {
@@ -68,6 +73,7 @@ public class userHelper extends SQLiteOpenHelper {
                         String surname = cursor.getString(cursor.getColumnIndex("surname"));
                         String birthdate = cursor.getString(cursor.getColumnIndex("birthdate"));
                         String address = cursor.getString(cursor.getColumnIndex("address"));
+                        String phone = cursor.getString(cursor.getColumnIndex("phone"));
                         fila.add("<" + email + "> " + name + " " + surname + "; " + birthdate + "; " + address + "; ");
                     } while (cursor.moveToNext());
                 }
@@ -82,7 +88,7 @@ public class userHelper extends SQLiteOpenHelper {
 
     public Boolean getUserByLogin(String[] login) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"email", "name", "surname", "birthdate", "address"};
+        String[] columns = {"email", "name", "surname", "birthdate", "address", "phone"};
         String whereClause = "email = ? AND pass = ?";
 //        String[] whereArgs = new String[] {"value1","value2"};
 
@@ -114,23 +120,24 @@ public class userHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public void insertUser(ContentValues values){
+    public Boolean insertUser(Context context, ContentValues values){
         SQLiteDatabase db = this.getWritableDatabase();
 
         if (db != null) {
-            db.insert(
-                    TABLE_NAME,
-                    null,
-                    values);
-
-            /*try {
-                db.execSQL(query.toString());
-//                        db.execSQL("Insert into user values ('arnau.pratc@gmail.com','Arnau','Prat','01/02/1984','sdfsd sdfds')");
-            } catch (Exception e) {
-                Log.e("Padawan", e.toString());
-            }*/
-            db.close();
+            try {
+                db.insertOrThrow(
+                        TABLE_NAME,
+                        null,
+                        values);
+                db.close();
+                return true;
+            } catch (SQLiteConstraintException e){
+                Log.v("Padawan", e.getMessage());
+                Toast.makeText(context, R.string.user_already_registered, Toast.LENGTH_LONG).show();
+                return false;
+            }
         }
+        return false;
     }
 
     public void insertUserTest(String query){

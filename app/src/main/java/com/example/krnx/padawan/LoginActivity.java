@@ -58,13 +58,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn() {
-        Log.v("Login", "Aqui");
         startActivity(new Intent(getApplicationContext(), SigninActivity.class));
     }
 
     private void logIn() {
-
-        String[] login = {usuari.getText().toString(), contrasenya.getText().toString()};
+        String[] login = {usuari.getText().toString(), SigninActivity.md5(contrasenya.getText().toString())};
         userHelper userHelper = new userHelper(getApplicationContext());
 
         if (userHelper.getUserByLogin(login)) {

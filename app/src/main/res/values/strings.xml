@@ -105,5 +105,7 @@
     <string name="surname">Cognoms</string>
     <string name="email">E-mail</string>
     <string name="phone">Telefon</string>
+    <string name="password">Contrasenya</string>
+    <string name="user_already_registered">L\'usuari ja esta registrat</string>
 
 </resources>

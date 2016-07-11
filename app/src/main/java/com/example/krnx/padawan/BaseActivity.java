@@ -1,6 +1,7 @@
 package com.example.krnx.padawan;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -9,10 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -49,6 +56,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Instanciamos el SharedPreferences
+        SharedPreferences settings = getSharedPreferences("Padawan-prefs", 0);
+
+        String useremail = settings.getString("email", "DEFAULT");
+
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView userName = (TextView) headerLayout.findViewById(R.id.header_name);
+        userName.setText(useremail);
+        Log.v("Padawan", userName.getText().toString());
     }
 
     @Override
@@ -95,7 +112,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void checkMenuItem(int activity) {
-        for (int i = 0; i < navigationView.getMenu().size(); ++i) navigationView.getMenu().getItem(i).setChecked(false);
+        for (int i = 0; i < navigationView.getMenu().size(); ++i)
+            navigationView.getMenu().getItem(i).setChecked(false);
         navigationView.getMenu().getItem(activity).setChecked(true);
     }
 }

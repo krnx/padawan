@@ -3,6 +3,7 @@ package com.example.krnx.padawan;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userHelper userHelper = new userHelper(getApplicationContext());
 
         if (userHelper.getUserByLogin(login)) {
+            SharedPreferences.Editor editor = getSharedPreferences("Padawan-prefs", MODE_PRIVATE).edit();
+            editor.putString("email", usuari.getText().toString());  //Guardem l'email per a poder accedir a les dades de l'usuari des d'altres activityes de l'app
+            editor.commit();
             startActivity(new Intent(getApplicationContext(), BaseActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();

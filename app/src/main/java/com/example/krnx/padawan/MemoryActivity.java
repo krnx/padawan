@@ -1,5 +1,8 @@
 package com.example.krnx.padawan;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.krnx.padawan.db.rankingHelper;
 import com.example.material.joanbarroso.flipper.CoolImageFlipper;
 
 import java.lang.reflect.Array;
@@ -106,7 +110,23 @@ public class MemoryActivity extends BaseActivity implements View.OnClickListener
                         estat.add(girada);
                         if(Integer.valueOf(estat.size()).equals(16)) {
                             Toast.makeText(this, "S'ha acabat la partida. tens " + intents + " punts", Toast.LENGTH_LONG).show();
-                            //TODO: Introduir els intents a la bbdd
+                            SharedPreferences settings = getSharedPreferences("Padawan-prefs", 0);
+                            String useremail = settings.getString("email", "DEFAULT");
+                            rankingHelper rankingHelper = new rankingHelper(getApplicationContext());
+                            ContentValues valuesToStore = new ContentValues();
+                            valuesToStore.put("email", useremail);
+                            valuesToStore.put("points", intents);
+
+                            if(rankingHelper.insertRanking(this, valuesToStore)){
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(new Intent(getApplicationContext(), MemoryActivity.class));
+                                    }
+                                }, 1500);
+                            }
+
                         }
                         girada = null;
                         clicable = true;

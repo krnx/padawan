@@ -22,19 +22,19 @@ import java.util.Map;
  */
 public class rankingHelper extends SQLiteOpenHelper {
     //Declaracion del nombre de la base de datos
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 13;
     //Declaracion global de la version de la base de datos
     public static final String DATABASE_NAME = "padawan";
     //Declaracion del nombre de la tabla
     public static final String TABLE_NAME = "ranking";
     //sentencia global de cracion de la base de datos
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
-            "id INT PRIMARY KEY UNIQUE AUTO_INCREMENT, " +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
             "email VARCHAR(50)," +
             "points INT , " +
-            "date DATE " +
+            "data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"+
             "FOREIGN KEY (email) REFERENCES user(email)" +
-            ");";
+    ");";
 
     public rankingHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,11 +51,12 @@ public class rankingHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLE_CREATE);
     }
 
-    public Map<String, String> getRanking() {
-        Map<String, String> fila;
+    public Map<String, List> getRanking() {
+        Map<String, List> fila;
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"email", "points"};
-        fila = new HashMap<String, String>();
+        String[] columns = {"id","email", "points", "data"};
+        fila = new HashMap<String, List>();
+        List values;
 
         if (db != null) {
             try {
@@ -70,9 +71,17 @@ public class rankingHelper extends SQLiteOpenHelper {
                 );
                 if (cursor.moveToFirst()) {
                     do {
+                        values = new ArrayList();
+                        String id = cursor.getString(cursor.getColumnIndex("id"));
                         String email = cursor.getString(cursor.getColumnIndex("email"));
                         String points = cursor.getString(cursor.getColumnIndex("points"));
-                        fila.put(email, points);
+                        String data = cursor.getString(cursor.getColumnIndex("data"));
+                        values.add(0, email);
+                        values.add(1, points);
+                        values.add(2, data);
+
+                        fila.put(id, values);
+                        Log.v("Padawan-ranking2", id+" "+email+" "+points+" "+data);
                     } while (cursor.moveToNext());
                 }
                 cursor.close();

@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class userHelper extends SQLiteOpenHelper {
     //Declaracion del nombre de la base de datos
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 13;
     //Declaracion global de la version de la base de datos
     public static final String DATABASE_NAME = "padawan";
     //Declaracion del nombre de la tabla

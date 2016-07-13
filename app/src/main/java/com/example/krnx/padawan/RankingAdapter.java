@@ -2,6 +2,7 @@ package com.example.krnx.padawan;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,9 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
 
     RankingAdapter(Context context) {
         rankingHelper = new rankingHelper(context);
-        Map<String, String> ranking = rankingHelper.getRanking();
+        Map<String, List> ranking = rankingHelper.getRanking();
+        Log.v("Padawan-ranking", ranking.toString());
+        Log.v("Padawan-ranking", "hola");
         players = new ArrayList<>();
 
         Iterator it = ranking.entrySet().iterator();
@@ -37,8 +40,13 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
             Map.Entry pair = (Map.Entry)it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
 
-            String email = pair.getKey().toString();
-            String points = pair.getValue().toString();
+            String id = (String) pair.getKey();
+            List values = (List) pair.getValue();
+            String email = (String) values.get(0);
+            String points = (String) values.get(1);
+            String data = (String) values.get(2);
+            Log.v("Padawan-ranking2", id+" "+email+" "+points+" "+data);
+//            String points = pair.getValue().toString();
 
             players.add(new Ranking(email, Integer.valueOf(points)));
             it.remove(); // avoids a ConcurrentModificationException

@@ -1,5 +1,6 @@
 package com.example.krnx.padawan;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,41 +8,42 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.krnx.padawan.db.rankingHelper;
+import com.example.krnx.padawan.model.Ranking;
 import com.example.krnx.padawan.model.User;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by arnau on 05/07/16.
  */
-public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterViewHolder>{
+public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterViewHolder> {
 
-    ArrayList<User> contactos;
+    ArrayList<Ranking> players;
 
-    RankingAdapter(){
-        contactos = new ArrayList<>();
-       /* contactos.add(new User(0,"Benito Camela","123456789"));
-        contactos.add(new User(0,"Alberto Carlos Huevos","123456789"));
-        contactos.add(new User(1,"Lola Mento","123456789"));
-        contactos.add(new User(0,"Aitor Tilla","123456789"));
-        contactos.add(new User(0,"Elvis Teck","123456789"));
-        contactos.add(new User(1,"Débora Dora","123456789"));
-        contactos.add(new User(0,"Borja Món de York","123456789"));
-        contactos.add(new User(1,"Encarna Vales","123456789"));
-        contactos.add(new User(0,"Enrique Cido","123456789"));
-        contactos.add(new User(0,"Francisco Jones","123456789"));
-        contactos.add(new User(1,"Estela Gartija","123456789"));
-        contactos.add(new User(0,"Andrés Trozado","123456789"));
-        contactos.add(new User(0,"Carmelo Cotón","123456789"));
-        contactos.add(new User(0,"Alberto Mate","123456789"));
-        contactos.add(new User(0,"Chema Pamundi","123456789"));
-        contactos.add(new User(0,"Armando Adistancia","123456789"));
-        contactos.add(new User(1,"Helena Nito Del Bosque","123456789"));
-        contactos.add(new User(0,"Unai Nomás","123456789"));
-        contactos.add(new User(1,"Ester Colero","123456789"));
-        contactos.add(new User(0,"Marcos Corrón","123456789"));*/
+    private rankingHelper rankingHelper;
+
+    RankingAdapter(Context context) {
+        rankingHelper = new rankingHelper(context);
+        Map<String, String> ranking = rankingHelper.getRanking();
+        players = new ArrayList<>();
+
+        Iterator it = ranking.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+
+            String email = pair.getKey().toString();
+            String points = pair.getValue().toString();
+
+            players.add(new Ranking(email, Integer.valueOf(points)));
+            it.remove(); // avoids a ConcurrentModificationException
+        }
     }
-
 
     @Override
     public RankingAdapter.AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -54,20 +56,20 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
 
     @Override
     public void onBindViewHolder(RankingAdapter.AdapterViewHolder adapterViewholder, int position) {
-        int iconLayout = contactos.get(position).getIcon();
+//        int iconLayout = players.get(position).getIcon();
         //Dependiendo del entero se asignará una imagen u otra
-        switch (iconLayout){
-            case 0:
-                //male
-                adapterViewholder.icon.setImageDrawable(adapterViewholder.v.getResources().getDrawable(R.mipmap.avatar));
-                break;
-            case 1:
-                //female
-                adapterViewholder.icon.setImageDrawable(adapterViewholder.v.getResources().getDrawable(R.mipmap.avatar));
-                break;
-        }
-        adapterViewholder.name.setText(contactos.get(position).getName());
-        adapterViewholder.phone.setText(contactos.get(position).getPhone());
+//        switch (iconLayout){
+//            case 0:
+        //male
+        adapterViewholder.icon.setImageDrawable(adapterViewholder.v.getResources().getDrawable(R.mipmap.avatar));
+//                break;
+//            case 1:
+        //female
+//                adapterViewholder.icon.setImageDrawable(adapterViewholder.v.getResources().getDrawable(R.mipmap.avatar));
+//                break;
+//        }
+        adapterViewholder.email.setText(players.get(position).getEmail());
+        adapterViewholder.points.setText(players.get(position).getPoints().toString());
 
     }
 
@@ -75,9 +77,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
     public int getItemCount() {
         //Debemos retornar el tamaño de todos los elementos contenidos en el viewholder
         //Por defecto es return 0 --> No se mostrará nada.
-        return contactos.size();
+        return players.size();
     }
-
 
 
     //Definimos una clase viewholder que funciona como adapter para
@@ -90,15 +91,16 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.AdapterV
         */
 
         public ImageView icon;
-        public TextView name;
-        public TextView phone;
+        public TextView email;
+        public TextView points;
         public View v;
+
         public AdapterViewHolder(View itemView) {
             super(itemView);
             this.v = itemView;
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
-            this.name = (TextView) itemView.findViewById(R.id.name);
-            this.phone = (TextView) itemView.findViewById(R.id.phone);
+            this.email = (TextView) itemView.findViewById(R.id.ranking_email);
+            this.points = (TextView) itemView.findViewById(R.id.ranking_points);
         }
     }
 }

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = getSharedPreferences("Padawan-prefs", MODE_PRIVATE).edit();
             editor.putString("email", usuari.getText().toString());  //Guardem l'email per a poder accedir a les dades de l'usuari des d'altres activityes de l'app
             editor.commit();
-            startActivity(new Intent(getApplicationContext(), BaseActivity.class));
+            startActivity(new Intent(getApplicationContext(), CalculadoraActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();
         }

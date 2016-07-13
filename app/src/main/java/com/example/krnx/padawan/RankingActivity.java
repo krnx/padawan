@@ -31,6 +31,6 @@ public class RankingActivity extends BaseActivity {
         //El adapter se encarga de  adaptar un objeto definido en el código a una vista en xml
         //según la estructura definida.
         //Asignamos nuestro custom Adapter
-        mRecyclerView.setAdapter(new RankingAdapter());
+        mRecyclerView.setAdapter(new RankingAdapter(getApplicationContext()));
     }
 }

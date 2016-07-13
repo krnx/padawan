@@ -210,7 +210,7 @@ public class PlayerActivity extends BaseActivity implements View.OnClickListener
             }
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 public void onPrepared(MediaPlayer mp) {
-                    Toast.makeText(getApplicationContext(), R.string.playback_start, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), R.string.playback_start, Toast.LENGTH_SHORT).show();
                     player_pantalla.setText(getRealPathFromURI(getApplicationContext(), uriSound));
                     isPrepared = true;
                 }

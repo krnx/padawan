@@ -24,7 +24,7 @@
             android:src="@android:drawable/btn_star_big_on" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/ranking_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -33,11 +33,12 @@
             android:textColor="@color/colorAccent" />
 
         <TextView
-            android:id="@+id/phone"
+            android:id="@+id/ranking_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
+            android:layout_weight="3"
+            android:paddingRight="10dp"
+            android:textAlignment="textEnd"
             android:text="PRRRRR"
             android:textColor="@color/colorAccent" />
     </LinearLayout>

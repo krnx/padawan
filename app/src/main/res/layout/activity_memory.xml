@@ -20,8 +20,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -30,8 +30,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -40,8 +40,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -50,8 +50,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
     </LinearLayout>
@@ -72,8 +72,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -82,8 +82,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -92,8 +92,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -102,8 +102,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
     </LinearLayout>
@@ -124,8 +124,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -134,8 +134,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -144,8 +144,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -154,8 +154,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
     </LinearLayout>
@@ -175,8 +175,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -185,8 +185,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -195,8 +195,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
         <ImageView
@@ -204,8 +204,8 @@
             android:background="@mipmap/avatar"
             android:layout_marginTop="0dp"
             android:layout_weight="0"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_width="90dp"
             />
 
     </LinearLayout>

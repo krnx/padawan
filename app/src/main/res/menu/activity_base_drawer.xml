@@ -3,8 +3,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/calculadora"
-            android:title="@string/calculadora" />
+            android:id="@+id/memory"
+            android:title="@string/memory" />
         <item
             android:id="@+id/ranking"
             android:title="@string/ranking" />
@@ -12,14 +12,8 @@
             android:id="@+id/player"
             android:title="@string/player" />
         <item
-            android:id="@+id/sensor"
-            android:title="@string/sensor" />
-        <item
-            android:id="@+id/twitter"
-            android:title="@string/twitter" />
-        <item
-            android:id="@+id/memory"
-            android:title="@string/memory" />
+            android:id="@+id/calculadora"
+            android:title="@string/calculadora" />
     </group>
 
 </menu>

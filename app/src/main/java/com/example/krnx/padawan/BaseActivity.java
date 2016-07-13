@@ -84,12 +84,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             case R.id.player:
                 startActivity(new Intent(getApplicationContext(), PlayerActivity.class));
                 break;
-            case R.id.sensor:
+            /*case R.id.sensor:
                 startActivity(new Intent(getApplicationContext(), SensorActivity.class));
                 break;
             case R.id.twitter:
                 startActivity(new Intent(getApplicationContext(), TwitterActivity.class));
-                break;
+                break;*/
             case R.id.memory:
                 startActivity(new Intent(getApplicationContext(), MemoryActivity.class));
                 break;
